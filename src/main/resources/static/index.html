@@ -67,11 +67,11 @@
         <p style="text-align-last: center;" id="numSeats"></p>
         <form class="form-inline">
             <input id="row" type="text" class="form-control mb-2"
-                   placeholder="Cinema Name">
-            <input type="text" id="col" placeholder="Date" name="date" class="form-control mb-2">
+                   placeholder="Row">
+            <input type="text" id="col" placeholder="Culumn" name="date" class="form-control mb-2">
             <button id="button" type="button" class="btn btn-primary mb-2"
-                    onclick="app.actualizarListadodeFunciones($('#cinemaName').val(),$('#date').val())"
-                    value="get Functions">Submit
+                    onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())"
+                    value="get Functions">Buy
             </button>
         </form>
     </div>

@@ -5,6 +5,7 @@ var app = (function () {
         var listaFunciones = [];
         var listaSillas = [];
         var numberSeats = 0;
+        var funcionSeleccionada;
 
 
         var mapObjetos = (funciones) => {
@@ -31,41 +32,48 @@ var app = (function () {
         var dibujarObjetos = function (sillitas) {
             var canvas = document.getElementById("myCanvas");
             var lapiz = canvas.getContext("2d");
-            console.log(sillitas);
             numberSeats = 0;
             lapiz.strokeStyle = 'lightgrey';
             for (let i = 0; i < 7; i++) {
                 for (let j = 0; j < 12; j++) {
+
                     if (sillitas[i][j] === true) {
                         lapiz.fillStyle = "#34BF49";
                         numberSeats++;
-                        console.log(numberSeats)
+
                     } else {
                         lapiz.fillStyle = "#FF4C4C";
                     }
                     lapiz.fillRect(j * 65, i * 65, 60, 60);
                 }
             }
-            console.log(numberSeats)
+
+        }
+        var getMovie= function (){
+
+            return funcionSeleccionada.movie.name;
         }
 
         return {
+
             dibujarObjetos(nombre, fecha, nombrePelicula) {
-                console.log(fecha)
-                console.log(nombrePelicula)
+
 
                 $("#availability").text("Availability of: " + nombrePelicula);
-
+                console.log("perra")
                 api.getFunctionsByCinemaAndDate(nombre, fecha, (funciones) => {
                     for (const funcion of funciones) {
                         if (funcion.movie.name === nombrePelicula) {
+                            console.log("perra2 jeje")
                             dibujarObjetos(funcion.seats);
+                            funcionSeleccionada = funcion;
+                            fechaFuncion = funcion.date;
                             break;
                             //:3
                         }
                     }
                     $("#numSeats").text("Number of available chairs: " + numberSeats);
-                    console.log(numberSeats + "---------------")
+
                 })
 
             },
@@ -82,6 +90,11 @@ var app = (function () {
             },
             cambiarFecha(fecha) {
                 fechaFuncion = fecha;
+            },
+            actualizarSilla(cinema,fila,columna){
+                api.updateChairbyRowAndColumn(cinema,fechaFuncion,getMovie(),fila,columna);
+                this.dibujarObjetos(cinema,fechaFuncion,getMovie());
+
             }
         }
     }

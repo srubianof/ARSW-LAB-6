@@ -11,11 +11,9 @@ apiclient = (function () {
                 callback(data);
             }, null)
         },
-        updateChairbyRowAndColumn: function (cinema, date, movie, row, col, callback) {
-            $.post(url + cinema + "/" + date + "/" + movie + "/" + row + "/" + col,
-                (data) => {
-                    callback(data)
-                },
+        updateChairbyRowAndColumn: function (cinema, date, movie, row, col) {
+            $.post(url + cinema + "/" + date + "/" + movie + "/" + row + "/" + col,{}
+                ,
                 null)
         }
     }
