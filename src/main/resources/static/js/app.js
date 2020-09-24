@@ -4,6 +4,7 @@ var app = (function () {
         var fechaFuncion = "";
         var listaFunciones = [];
         var listaSillas = [];
+        var numberSeats = 0;
 
 
         var mapObjetos = (funciones) => {
@@ -15,6 +16,7 @@ var app = (function () {
                 })
             )
             $("#tablaMovies > tbody").empty();
+
             listaFunciones.forEach(({name, genre, time, date}) => {
                 $("#tablaMovies > tbody").append(
                     `<tr>
@@ -30,23 +32,30 @@ var app = (function () {
             var canvas = document.getElementById("myCanvas");
             var lapiz = canvas.getContext("2d");
             console.log(sillitas);
+            numberSeats = 0;
             lapiz.strokeStyle = 'lightgrey';
             for (let i = 0; i < 7; i++) {
                 for (let j = 0; j < 12; j++) {
                     if (sillitas[i][j] === true) {
-                        lapiz.fillStyle = "#FFC300";
+                        lapiz.fillStyle = "#34BF49";
+                        numberSeats++;
+                        console.log(numberSeats)
                     } else {
-                        lapiz.fillStyle = "#900C3F";
+                        lapiz.fillStyle = "#FF4C4C";
                     }
-                    lapiz.fillRect(j * 85, i * 85, 80, 80);
+                    lapiz.fillRect(j * 65, i * 65, 60, 60);
                 }
             }
+            console.log(numberSeats)
         }
 
         return {
             dibujarObjetos(nombre, fecha, nombrePelicula) {
                 console.log(fecha)
                 console.log(nombrePelicula)
+
+                $("#availability").text("Availability of: " + nombrePelicula);
+
                 api.getFunctionsByCinemaAndDate(nombre, fecha, (funciones) => {
                     for (const funcion of funciones) {
                         if (funcion.movie.name === nombrePelicula) {
@@ -55,7 +64,10 @@ var app = (function () {
                             //:3
                         }
                     }
+                    $("#numSeats").text("Number of available chairs: " + numberSeats);
+                    console.log(numberSeats + "---------------")
                 })
+
             },
             actualizarListadodeFunciones(nombre, fecha) {
                 this.cambiarFecha(fecha);

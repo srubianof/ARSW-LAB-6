@@ -96,6 +96,18 @@ public class CinemaAPIController {
         }
     }
 
+    @PostMapping("cinemas/{name}/{date}/{movie}/{row}/{col}")
+    public ResponseEntity<?> buyTicket(@PathVariable String name, @PathVariable String date, @PathVariable String movie, @PathVariable String row, @PathVariable String col) {
+        try {
+            cinemaServices.buyTicket(Integer.parseInt(row), Integer.parseInt(col), name, date, movie);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+
+        } catch (Exception ex) {
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Not possible, seat already bought", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
     
 

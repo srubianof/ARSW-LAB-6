@@ -1,18 +1,22 @@
 apiclient = (function () {
     let url = "http://localhost:8080/cinemas/"
-
     return {
-        getFunctionsByCinema: function (name,callback) {
-            $.getJSON(url+name,(data)=>{
+        getFunctionsByCinema: function (name, callback) {
+            $.getJSON(url + name, (data) => {
                 callback(data);
-            },null)
+            }, null)
         },
-        getFunctionsByCinemaAndDate: function (name,date,callback) {
-            $.getJSON(url+name+"/"+date,(data)=>{
+        getFunctionsByCinemaAndDate: function (name, date, callback) {
+            $.getJSON(url + name + "/" + date, (data) => {
                 callback(data);
-            },null)
+            }, null)
         },
-
+        updateChairbyRowAndColumn: function (cinema, date, movie, row, col, callback) {
+            $.post(url + cinema + "/" + date + "/" + movie + "/" + row + "/" + col,
+                (data) => {
+                    callback(data)
+                },
+                null)
+        }
     }
-
 })();
