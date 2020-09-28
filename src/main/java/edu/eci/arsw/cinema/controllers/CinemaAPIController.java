@@ -86,7 +86,7 @@ public class CinemaAPIController {
     }
 
     @PutMapping("/cinemas/{name}")
-    public ResponseEntity<?> updateCinemaFunction(@RequestBody CinemaFunction cinemaFunction, @PathVariable String name) {
+    public ResponseEntity<?> updateCinemaFunction(@RequestBody String[] cinemaFunction, @PathVariable String name) {
         try {
             return new ResponseEntity<>(cinemaServices.updateOrCreateFunction(name, cinemaFunction), HttpStatus.CREATED);
 

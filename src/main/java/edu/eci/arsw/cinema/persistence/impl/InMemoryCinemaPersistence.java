@@ -132,8 +132,8 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
     }
 
     @Override
-
-    public CinemaFunction updateOrCreateFunction(String name, CinemaFunction cinemaFunction) throws CinemaPersistenceException {
+    public CinemaFunction updateOrCreateFunction(String name, String[] cinemaFunction) throws CinemaPersistenceException {
+        System.out.println();
         Cinema cinema = this.getCinema(name);
         CinemaFunction updatedFunction = null;
         if (cinema == null) {
@@ -141,17 +141,21 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
         }
         List<CinemaFunction> functions = cinema.getFunctions();
         for (CinemaFunction f : functions) {
-            if (f.getMovie().getName().equals(cinemaFunction.getMovie().getName())) {
+            if (f.getMovie().getName().equals(cinemaFunction[0])) {
                 updatedFunction = f;
-                f.setDate(cinemaFunction.getDate());
-                f.setMovie(cinemaFunction.getMovie());
-                f.setSeats(cinemaFunction.getSeats());
+                f.setDate(cinemaFunction[1]);
+                Movie movieN = new Movie();
+                movieN.setName(cinemaFunction[0]);
+                movieN.setGenre(cinemaFunction[2]);
+                f.setMovie(movieN);
             }
         }
         if (updatedFunction == null) {
-            cinema.addFuncion(cinemaFunction);
+            CinemaFunction cinemaFunctionN = new CinemaFunction(new Movie(cinemaFunction[1], "Action"), cinemaFunction[0]);
+            cinema.addFuncion(cinemaFunctionN);
+            return cinemaFunctionN;
         }
-        return cinemaFunction;
+        return updatedFunction;
 
     }
 

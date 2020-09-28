@@ -56,10 +56,9 @@ public class CinemaServices {
     public void addFunctionToCinema(String name, CinemaFunction cinemaFunction) throws CinemaPersistenceException {
         Cinema cinema = cps.getCinema(name);
         cinema.addFuncion(cinemaFunction);
-
     }
 
-    public CinemaFunction updateOrCreateFunction(String name, CinemaFunction cinemaFunction) throws CinemaPersistenceException {
+    public CinemaFunction updateOrCreateFunction(String name, String[] cinemaFunction) throws CinemaPersistenceException {
         return cps.updateOrCreateFunction(name, cinemaFunction);
 
     }

@@ -49,22 +49,22 @@ var app = (function () {
             }
 
         }
-        var getMovie= function (){
-
+        var getMovie = function () {
             return funcionSeleccionada.movie.name;
+        }
+        var getGenre = function () {
+            return funcionSeleccionada.movie.genre;
+        }
+        var getDate = function () {
+            return funcionSeleccionada.date;
         }
 
         return {
-
             dibujarObjetos(nombre, fecha, nombrePelicula) {
-
-
                 $("#availability").text("Availability of: " + nombrePelicula);
-                console.log("perra")
                 api.getFunctionsByCinemaAndDate(nombre, fecha, (funciones) => {
                     for (const funcion of funciones) {
                         if (funcion.movie.name === nombrePelicula) {
-                            console.log("perra2 jeje")
                             dibujarObjetos(funcion.seats);
                             funcionSeleccionada = funcion;
                             fechaFuncion = funcion.date;
@@ -73,9 +73,7 @@ var app = (function () {
                         }
                     }
                     $("#numSeats").text("Number of available chairs: " + numberSeats);
-
                 })
-
             },
             actualizarListadodeFunciones(nombre, fecha) {
                 this.cambiarFecha(fecha);
@@ -91,10 +89,24 @@ var app = (function () {
             cambiarFecha(fecha) {
                 fechaFuncion = fecha;
             },
-            actualizarSilla(cinema,fila,columna){
-                api.updateChairbyRowAndColumn(cinema,fechaFuncion,getMovie(),fila,columna);
-                this.dibujarObjetos(cinema,fechaFuncion,getMovie());
+            actualizarSilla(cinema, fila, columna) {
+                api.updateChairbyRowAndColumn(cinema, fechaFuncion, getMovie(), fila, columna);
+                this.dibujarObjetos(cinema, fechaFuncion, getMovie());
+            },
+            cambiarHora(cinema, hora) {
+                var putPromise = $.ajax({
+                    url: "/cinemas/" + cinema,
+                    type: 'PUT',
+                    data: JSON.stringify([getMovie(), getDate().split(" ")[0] + " " + hora, getGenre()]),
+                    contentType: "application/json"
+                });
 
+                putPromise.then(
+                    function () {
+                        // this.dibujarObjetos(cinema, fechaFuncion, getMovie(getDate().split(" ")[0]));
+                        app.actualizarListadodeFunciones(cinema, getDate().split(" ")[0]);
+                    }
+                );
             }
         }
     }

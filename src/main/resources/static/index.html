@@ -19,6 +19,14 @@
             font-size: 22px;
         }
     </style>
+    <style>
+        .cuadro {
+            width: 320px;
+            padding: 10px;
+            border: 5px solid gray;
+            margin: 0;
+        }
+    </style>
 
 </head>
 <body>
@@ -61,18 +69,48 @@
             </table>
         </div>
     </div>
-    <div style="float: right; width: 50%; height: 100%" ;>
+    <div style="float: right; width: 50%; height: 100%">
         <p style="text-align-last: center;" id="availability"></p>
         <canvas id="myCanvas" width="775" height="450" style="border:5px solid #1b1818;"></canvas>
         <p style="text-align-last: center;" id="numSeats"></p>
         <form class="form-inline">
-            <input id="row" type="text" class="form-control mb-2"
-                   placeholder="Row">
-            <input type="text" id="col" placeholder="Culumn" name="date" class="form-control mb-2">
-            <button id="button" type="button" class="btn btn-primary mb-2"
-                    onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())"
-                    value="get Functions">Buy
-            </button>
+            <div class="cuadro" style="width: 50%">
+                <p style="text-align-last: center;">Buy Seats</p>
+                <label>Seat</label>
+                <input id="row" type="text" class="form-control mb-2"
+                       placeholder="Row">
+                <input type="text" id="col" placeholder="Column" name="date" class="form-control mb-2">
+                <button id="button" type="button" class="btn btn-primary mb-2"
+                        onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())"
+                        value="get Functions">Buy
+                </button>
+            </div>
+        </form>
+        <br>
+        <br>
+        <br>
+        <form class="form-inline">
+            <span class="border">
+                <div class="cuadro" style="width: 50%">
+                    <p style="text-align-last: center;">Administrator Mode</p>
+
+                    <label>Edit Function: </label>
+                    <input type="time" id="time" placeholder="New Hour" name="time" class="form-control mb-2">
+                    <button id="test" type="button" class="btn btn-primary mb-2"
+                            onclick="app.cambiarHora($('#cinemaName').val(),$('#time').val())" value="get Functions">Save/Update
+                    </button>
+                    <br>
+                    <br>
+                    <button id="newFunction" type="button" class="btn btn-primary mb-2"
+                            onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())" value="get Functions">Create new function
+                    </button>
+                    <button id="deleteFunction" type="button" class="btn btn-primary mb-2"
+                                     onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())" value="get Functions">Delete Function
+                    </button>
+                </div>
+            </span>
+
+
         </form>
     </div>
 </div>

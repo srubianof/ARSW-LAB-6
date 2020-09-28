@@ -84,6 +84,6 @@ public interface CinemaPersitence {
      * @return the cinema function
      * @throws CinemaPersistenceException the cinema persistence exception
      */
-    CinemaFunction updateOrCreateFunction(String name, CinemaFunction cinemaFunction) throws CinemaPersistenceException;
+    CinemaFunction updateOrCreateFunction(String name, String[] cinemaFunction) throws CinemaPersistenceException;
 
 }
