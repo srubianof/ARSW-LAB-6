@@ -12,9 +12,26 @@ apiclient = (function () {
             }, null)
         },
         updateChairbyRowAndColumn: function (cinema, date, movie, row, col) {
-            $.post(url + cinema + "/" + date + "/" + movie + "/" + row + "/" + col,{}
+            $.post(url + cinema + "/" + date + "/" + movie + "/" + row + "/" + col, {}
                 ,
                 null)
+        },
+        updateOrCreateFunction: function (movieName, date, time, genre, cinemaName, callback) {
+            var putPromise = $.ajax({
+                url: "/cinemas/" + cinemaName,
+                type: 'PUT',
+                data: JSON.stringify([movieName, date + " " + time, genre]),
+                contentType: "application/json"
+            });
+
+            putPromise.then(
+                (res) => {
+                    callback(res);
+                }
+                // this.dibujarObjetos(cinema, fechaFuncion, getMovie(getDate().split(" ")[0]));
+
+
+            );
         }
     }
 })();

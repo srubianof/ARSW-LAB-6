@@ -151,7 +151,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence {
             }
         }
         if (updatedFunction == null) {
-            CinemaFunction cinemaFunctionN = new CinemaFunction(new Movie(cinemaFunction[1], "Action"), cinemaFunction[0]);
+            CinemaFunction cinemaFunctionN = new CinemaFunction(new Movie(cinemaFunction[0], cinemaFunction[2]), cinemaFunction[1]);
             cinema.addFuncion(cinemaFunctionN);
             return cinemaFunctionN;
         }

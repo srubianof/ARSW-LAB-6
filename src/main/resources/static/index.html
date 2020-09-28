@@ -44,6 +44,7 @@
                     onclick="app.actualizarListadodeFunciones($('#cinemaName').val(),$('#date').val())"
                     value="get Functions">Submit
             </button>
+
         </form>
         <br>
         <br>
@@ -97,20 +98,24 @@
                     <label>Edit Function: </label>
                     <input type="time" id="time" placeholder="New Hour" name="time" class="form-control mb-2">
                     <button id="test" type="button" class="btn btn-primary mb-2"
-                            onclick="app.cambiarHora($('#cinemaName').val(),$('#time').val())" value="get Functions">Save/Update
+                            onclick="app.createIfUdefiniedOrUpdate($('#cinemaName').val(),$('#time').val())" value="get Functions">Save/Update
                     </button>
                     <br>
                     <br>
                     <button id="newFunction" type="button" class="btn btn-primary mb-2"
-                            onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())" value="get Functions">Create new function
+                            onclick="app.createOrUpdate()" value="get Functions">Create new function
                     </button>
                     <button id="deleteFunction" type="button" class="btn btn-primary mb-2"
-                                     onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())" value="get Functions">Delete Function
+                            onclick="app.actualizarSilla($('#cinemaName').val(),$('#row').val(),$('#col').val())"
+                            value="get Functions">Delete Function
                     </button>
+                    <br>
+                    <br>
+                    <form class="form-inline">
+                        <div id="inputTexts"></div>
+                    </form>
                 </div>
             </span>
-
-
         </form>
     </div>
 </div>

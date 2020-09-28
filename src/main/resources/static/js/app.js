@@ -93,20 +93,30 @@ var app = (function () {
                 api.updateChairbyRowAndColumn(cinema, fechaFuncion, getMovie(), fila, columna);
                 this.dibujarObjetos(cinema, fechaFuncion, getMovie());
             },
-            cambiarHora(cinema, hora) {
-                var putPromise = $.ajax({
-                    url: "/cinemas/" + cinema,
-                    type: 'PUT',
-                    data: JSON.stringify([getMovie(), getDate().split(" ")[0] + " " + hora, getGenre()]),
-                    contentType: "application/json"
-                });
-
-                putPromise.then(
-                    function () {
-                        // this.dibujarObjetos(cinema, fechaFuncion, getMovie(getDate().split(" ")[0]));
+            createIfUdefiniedOrUpdate(cinema, hora) {
+                if (($("#newName").val() === undefined && $("#newName").val() === undefined) || ($("#newName").val() === "" || $("#newName").val() === null)) {
+                    api.updateOrCreateFunction(getMovie(), getDate().split(" ")[0], hora, getGenre(), cinema, (funcion) => {
                         app.actualizarListadodeFunciones(cinema, getDate().split(" ")[0]);
-                    }
-                );
+                    })
+                    console.log("HOLIWIS")
+                } else {
+                    api.updateOrCreateFunction($("#newName").val(), getDate().split(" ")[0], hora, $("#newGenre").val(), cinema, (funcion) => {
+                        app.actualizarListadodeFunciones(cinema, getDate().split(" ")[0]);
+                    })
+                }
+            },
+            createOrUpdate() {
+                var myCanvas = document.getElementById("myCanvas");
+                var ctx = myCanvas.getContext("2d");
+                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+                $("#inputTexts").append(
+                    `<input id="newName" type="text" class="form-control mb-2"
+                           placeholder="New name">
+                    <br>
+                    <input id="newGenre" type="text" class="form-control mb-2"
+                           placeholder="New genre">`
+                )
             }
         }
     }
