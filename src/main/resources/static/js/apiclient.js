@@ -32,6 +32,21 @@ apiclient = (function () {
 
 
             );
+        },
+
+        deleteFunction: function (movieName, date,cinemaName, callback) {
+            console.log("/cinemas/" + cinemaName+"/"+date + " " + time+"/"+movieName);
+            var deletePromise = $.ajax({
+                url: "/cinemas/" + cinemaName+"/"+date +"/"+movieName,
+                type: 'DELETE'
+            });
+            deletePromise.then(
+                (res) => {
+                    callback(res);
+                });
+
+            
         }
+
     }
 })();

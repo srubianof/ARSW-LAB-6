@@ -117,7 +117,18 @@ var app = (function () {
                     <input id="newGenre" type="text" class="form-control mb-2"
                            placeholder="New genre">`
                 )
+            },
+            deleteFunction(cinema){
+                console.log(getDate());
+                api.deleteFunction(getMovie(),getDate(),cinema,(funcion) => {
+                    app.actualizarListadodeFunciones(cinema, getDate().split(" ")[0]);
+                    var myCanvas = document.getElementById("myCanvas");
+                    var ctx = myCanvas.getContext("2d");
+                    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+                })
             }
+
         }
     }
 )();

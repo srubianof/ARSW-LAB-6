@@ -107,6 +107,18 @@ public class CinemaAPIController {
             return new ResponseEntity<>("Not possible, seat already bought", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/cinemas/{name}/{date}/{movieName}")
+    public ResponseEntity<?> deleteFunction(@PathVariable String name, @PathVariable String date, @PathVariable String movieName) {
+        try {
+            cinemaServices.deleteFunction(name,date,movieName);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        } catch (Exception ex) {
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Not possible, seat already bought", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
     

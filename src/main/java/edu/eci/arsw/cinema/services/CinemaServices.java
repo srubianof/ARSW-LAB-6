@@ -62,4 +62,18 @@ public class CinemaServices {
         return cps.updateOrCreateFunction(name, cinemaFunction);
 
     }
+
+    public void deleteFunction(String cinemaName, String date, String movieName) throws CinemaPersistenceException {
+        Cinema cinema = cps.getCinema(cinemaName);
+        CinemaFunction function=null;
+        for (CinemaFunction cf:cinema.getFunctions()) {
+            if (cf.getMovie().getName().equals(movieName) && cf.getDate().equals(date)){
+                function=cf;
+                cinema.getFunctions().remove(function);
+                break;
+            }
+
+        }
+
+    }
 }
